@@ -3,6 +3,7 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class EvaluationService {
 
@@ -31,7 +32,21 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] acro = new char[phrase.length()];
+		int counter = 0;
+		System.out.println("phrase=" + phrase);
+		acro[counter] = phrase.charAt(0);
+		counter++;
+		for (int i = 0; i < acro.length; i++) {
+			if (phrase.charAt(i) == ' ' || phrase.charAt(i) == '-') {
+				acro[counter] = phrase.charAt(i + 1);
+				counter++;
+				System.out.println("char was " + phrase.charAt(i + 1));
+			}
+		}
+		String str = new String(acro).toUpperCase();
+		System.out.println(str);
+		return str;
 	}
 
 	/**
@@ -85,17 +100,41 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b && b == c && c == a) {
+				return true;
+			}else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b || b == c || c == a) {
+				return true;
+			}else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b || b == c || c == a) {
+				return false;
+			}else {
+				return true;
+			}
 		}
 
 	}
@@ -117,7 +156,60 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		char letter = 'A';
+		//= new char[string.length()];
+		
+		for (int i = 0; i < string.length(); i++) {
+			letter = string.toUpperCase().charAt(i);
+			System.out.println("letter was " + letter);
+			switch (letter) {
+			case 'A':
+			case 'E':
+			case 'I':
+			case 'O':
+			case 'U':
+			case 'L':
+			case 'N':
+			case 'R':
+			case 'S':
+			case 'T':
+				score++;
+				break;
+			case 'D':
+			case 'G':
+				score+=2;
+				break;
+			case 'B':
+			case 'C':
+			case 'M':
+			case 'P':
+				score+= 3;
+				break;
+			case 'F':
+			case 'H':
+			case 'V':
+			case 'W':
+			case 'Y':
+				score+= 4;
+				break;
+			case 'K':
+				score+= 5;
+				break;
+			case 'J':
+			case 'X':
+				score+= 8;
+				break;
+			case 'Q':
+			case 'Z':
+				score+= 10;
+				break;
+			
+			}System.out.println("score so far " + score);
+		}
+		
+		
+		return score;
 	}
 
 	/**
@@ -153,7 +245,58 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		/*
+		 * String card[] = string.split(" ");
+		String card2 = card[1] + card[3];
+		 */
+		
+/*		int[] ary = new int[4];
+		
+		int i = 0;
+		Scanner sc = new Scanner(string);
+		System.out.println(sc);
+		while(sc.hasNextInt()) {
+			if (ary[0] == 1) {
+				i++;
+			}else {
+				ary[i++] = sc.nextInt();
+				
+			}
+		}
+		String answer = ary.toString();
+		System.out.println("string is " + answer);*/
+		
+		/*
+		String answer = string.replaceAll("[^0-9]", "");
+		System.out.println("the number is " + answer);
+		return answer;
+		
+		// youtu.be/NQOK2cam3js
+		 *   01234567890123
+		 	"(223) 456-7890"
+		 	  012  345 6789
+		 	 
+		 */
+		int skip = 0;
+		int j = 0;
+		char[] digits = new char[10];
+		System.out.println("length " + string.length());
+		if (string.charAt(0) == '1') {
+			skip++;
+		}
+		for (int i = skip; i < string.length(); i++) {
+			System.out.println("digits is at ");
+			if (Character.isDigit(string.charAt(i))) {
+				System.out.print(j + " i is " + i);
+				digits[j] = string.charAt(i);
+				System.out.println(" curr digit " + digits[j]);
+				j++;
+			}
+		}
+
+		String answer = new String(digits);
+		System.out.println(answer);
+		return answer;
 	}
 
 	/**
@@ -506,6 +649,12 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
+		if (string.length() <= 1) {
+			return false;
+		}
+		String card[] = string.split(" ");
+		String card2 = card[1] + card[3];
+		
 		return false;
 	}
 
@@ -522,11 +671,16 @@ public class EvaluationService {
 	 * Now, perform the other three operations.
 	 * 
 	 * What is 7 minus 5?
+	 * int x = parseFirstNumber
+	 * int y = parsedSecondNumber
+	 * token = parsedToken
 	 * 
+	 * if (token = -)
+	 * int x - y
 	 * 2
 	 * 
 	 * What is 6 multiplied by 4?
-	 * 
+	 * 0	1	2	3		4	5
 	 * 24
 	 * 
 	 * What is 25 divided by 5?
@@ -538,7 +692,28 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		/*String str = string;
+		Scanner scan = new Scanner(string);
+		if (str.contains("divided")){
+			
+		}*/
+	//	Scanner scan = new Scanner(string);
+		//int next = scan.nextInt();
+		String str = string;
+		String arr[] = str.split(" ");
+		int x = Integer.parseInt(arr[2]);System.out.println("in it" + arr[2]);
+		int y = Integer.parseInt(arr[5]);
+		int z =0;
+		System.out.println("x = " + x);
+		System.out.println("y = " + y);
+		if (arr[3] == "multiplied") {
+			
+			z = x * y;
+		}
+		if (arr[3] == "divided") {
+			z = x / y;
+		}
+		return z;
 	}
 
 }
