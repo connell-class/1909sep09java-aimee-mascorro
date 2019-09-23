@@ -1,8 +1,12 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class EvaluationService {
 
@@ -31,7 +35,21 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] acro = new char[phrase.length()];
+		int counter = 0;
+		System.out.println("phrase=" + phrase);
+		acro[counter] = phrase.charAt(0);
+		counter++;
+		for (int i = 0; i < acro.length; i++) {
+			if (phrase.charAt(i) == ' ' || phrase.charAt(i) == '-') {
+				acro[counter] = phrase.charAt(i + 1);
+				counter++;
+				System.out.println("char was " + phrase.charAt(i + 1));
+			}
+		}
+		String str = new String(acro).toUpperCase();
+		System.out.println(str);
+		return str;
 	}
 
 	/**
@@ -85,17 +103,41 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b && b == c && c == a) {
+				return true;
+			}else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b || b == c || c == a) {
+				return true;
+			}else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double a = this.sideOne;
+			double b = this.sideTwo;
+			double c = this.sideThree;
+			
+			if (a == b || b == c || c == a) {
+				return false;
+			}else {
+				return true;
+			}
 		}
 
 	}
@@ -117,7 +159,60 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		char letter = 'A';
+		//= new char[string.length()];
+		
+		for (int i = 0; i < string.length(); i++) {
+			letter = string.toUpperCase().charAt(i);
+			System.out.println("letter was " + letter);
+			switch (letter) {
+			case 'A':
+			case 'E':
+			case 'I':
+			case 'O':
+			case 'U':
+			case 'L':
+			case 'N':
+			case 'R':
+			case 'S':
+			case 'T':
+				score++;
+				break;
+			case 'D':
+			case 'G':
+				score+=2;
+				break;
+			case 'B':
+			case 'C':
+			case 'M':
+			case 'P':
+				score+= 3;
+				break;
+			case 'F':
+			case 'H':
+			case 'V':
+			case 'W':
+			case 'Y':
+				score+= 4;
+				break;
+			case 'K':
+				score+= 5;
+				break;
+			case 'J':
+			case 'X':
+				score+= 8;
+				break;
+			case 'Q':
+			case 'Z':
+				score+= 10;
+				break;
+			
+			}System.out.println("score so far " + score);
+		}
+		
+		
+		return score;
 	}
 
 	/**
@@ -152,8 +247,76 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
+		/* 
+		 * Solved this problem with this info: 
+		 * https://stackoverflow.com/questions/4047808/what-is-the-best-way-to-tell-if-a-character-is-a-letter-or-number-in-java-withou
+		*/
+		
 		// TODO Write an implementation for this method declaration
-		return null;
+		/*
+		 * String card[] = string.split(" ");
+		String card2 = card[1] + card[3];
+		 */
+		
+/*		int[] ary = new int[4];
+		
+		int i = 0;
+		Scanner sc = new Scanner(string);
+		System.out.println(sc);
+		while(sc.hasNextInt()) {
+			if (ary[0] == 1) {
+				i++;
+			}else {
+				ary[i++] = sc.nextInt();
+				
+			}
+		}
+		String answer = ary.toString();
+		System.out.println("string is " + answer);*/
+		
+		/*
+		String answer = string.replaceAll("[^0-9]", "");
+		System.out.println("the number is " + answer);
+		return answer;
+		
+		// youtu.be/NQOK2cam3js
+		 *   01234567890123
+		 	"(223) 456-7890"
+		 	  012  345 6789
+		 	 
+		 */
+		int skip = 0;
+		int j = 0;
+		char[] digits = new char[10];
+		System.out.println("length " + string.length());
+		if (string.charAt(0) == '1') {
+			skip++;
+		}
+		for (int i = skip; i < string.length(); i++) {
+			System.out.print("digits is at ");
+			if (Character.isDigit(string.charAt(i))) {
+				System.out.print(j + " i is " + string.charAt(i));
+				if (j > 9) {
+					System.out.println("ran out of space");
+					throw new IllegalArgumentException();
+					
+				} else {
+					digits[j] = string.charAt(i);
+					System.out.println(" curr digit " + digits[j]);
+					j++;
+				}
+			}else {
+				System.out.println("char was " + string.charAt(i));
+			}
+		}
+
+		String answer = new String(digits);
+		if(j < 10) {
+			System.out.println("number too short ");
+			throw new IllegalArgumentException();
+		}
+		System.out.println(answer);
+		return answer;
 	}
 
 	/**
@@ -167,7 +330,39 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		 HashMap<String, Integer> incidence = new HashMap<String, Integer>();
+		 String[] words;
+		 String splitChar= " ";
+		 if (string.contains(",")) {
+			 splitChar = ",";
+		 }else if (string.contains("[/]")) {
+			 splitChar = "[/]" ;
+		 }else if (string.contains("[.]")) {
+			 splitChar = "[.]";
+		 }else if (string.contains("[\n]")) {
+			 splitChar = "[\n]"; 
+		 }
+		 words = string.split(splitChar);
+		 System.out.println(Arrays.toString(words));
+		// int i = words.length;
+		 System.out.println("the test word is " + words[0]);
+
+		 for (int i = 0; i < words.length-1; i++) {
+			 System.out.println("the Sarray is this long " + i);
+			 System.out.println("the current word is " + words[i]);
+			 if(incidence.containsKey(words[i])) {
+				 int counter = incidence.get(words[i]);
+				 incidence.put(words[i], (counter+1));
+				 System.out.println("the word " + words[i] + " was found " + counter);
+			 }else {
+				 incidence.put(words[i], 1);
+				 System.out.println("the word added was " + words[i] + " counter is at " + incidence.get(words[i]));
+			 }
+			 
+		 }
+		 System.out.println(incidence);
+		return incidence;
 	}
 
 	/**
@@ -207,10 +402,71 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T> {
 		private List<T> sortedList;
-
+		int index = 0;
+		
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			return 0;
+			//T numToCompare;
+			int sizeOfList = sortedList.size();
+			int middleIs = sizeOfList/2;
+			int counter = 0;
+			int comparing =0;
+			int toCompare=0;
+			System.out.println("Size of list is " + sizeOfList + " therefore " + sizeOfList/2 );
+		//	int toCompare = Integer.parseInt((String) t);
+		//	String toCompare = (String) sortedList.get(middleIs);
+			if (t instanceof String) {
+				System.out.println("It was a string");
+				comparing = Integer.parseInt((String) (t));
+				toCompare = Integer.parseInt((String) sortedList.get(middleIs));
+				System.out.println("comparing is " + comparing + " toCompare is " + toCompare);
+				
+				while (comparing != toCompare) {
+					System.out.println("in while string");
+					if (toCompare < comparing) {
+						System.out.println(toCompare + " < " + comparing);
+						middleIs++;
+						if(middleIs > sizeOfList-1) {
+							System.out.println("not found");
+							return 0;
+						}
+						toCompare = Integer.parseInt((String) sortedList.get(middleIs));
+						System.out.println("moved one forward");
+					}else{
+							//Integer.parseInt(toCompare) < Integer.parseInt((String) t)
+						 System.out.println(toCompare + ">" + comparing);
+						 middleIs--;
+						 if(middleIs < 0) {
+							 System.out.println("Not found");
+							 return 0;
+						 }
+						 toCompare = Integer.parseInt((String) sortedList.get(middleIs));
+					} /*else if (toCompare > comparing) {
+						toCompare = Integer.parseInt((String) sortedList.get(middleIs--));
+						System.out.println("new num to compare is " + toCompare);*/
+				}
+			}else if (t instanceof Integer) {
+				// Integer.parseInt((String) t);
+				System.out.println("it was an int");
+				comparing = (int) t;
+				toCompare = (int) sortedList.get(middleIs);
+				System.out.println("comparing " + comparing + " to " + toCompare);
+				while (comparing != toCompare) {
+					System.out.println("in while number");
+					if (toCompare < comparing) {
+						System.out.println(toCompare + " < " + comparing);
+						middleIs++;
+						toCompare = (int) sortedList.get(middleIs);
+					}else if (toCompare > comparing) {
+						System.out.println(toCompare + " > " + comparing);
+						middleIs--;
+						toCompare = (int) sortedList.get(middleIs);
+					}
+		
+				}
+			}
+			System.out.println("Found it at " + middleIs + " !!");
+			return middleIs;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -247,7 +503,103 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String[] arrayOfStrings = string.split(" ");
+		int sizeOfArray = arrayOfStrings.length;
+		StringBuilder pigLatin = new StringBuilder();
+		char temp;
+		String answer;
+		for (int i = 0; i < sizeOfArray; i++) {
+			answer = arrayOfStrings[i];
+			temp = arrayOfStrings[i].charAt(0);
+			switch (temp){
+			case 'a':
+			case 'e':	
+			case 'i':
+			case 'o':
+			case 'u':
+				pigLatin.append(arrayOfStrings[i]+ "ay");
+				break;
+			case 'b':			
+				pigLatin.append(answer.substring(1)+ "bay");
+				break;
+			case 'c':
+				pigLatin.append(answer.substring(1)+ "cay");
+				break;
+			case 'd':
+				pigLatin.append(answer.substring(1)+ "day");
+				break;
+			case 'f':
+				pigLatin.append(answer.substring(1)+ "fay");
+				break;
+			case 'g':
+				pigLatin.append(answer.substring(1)+ "gay");
+				break;
+			case 'j':
+				pigLatin.append(answer.substring(1)+ "jay");
+				break;
+			case 'k':
+				pigLatin.append(answer.substring(1)+ "kay");
+				break;
+			case 'l':
+				pigLatin.append(answer.substring(1)+ "lay");
+				break;
+			case 'm':
+				pigLatin.append(answer.substring(1)+ "may");
+				break;
+			case 'n':
+				pigLatin.append(answer.substring(1)+ "nay");
+				break;
+			case 'p':
+				pigLatin.append(answer.substring(1)+ "pay");
+				break;
+			case 'q':
+				if (answer.charAt(1) == 'u')
+					pigLatin.append(answer.substring(2)+ "quay");
+				else
+					pigLatin.append(answer.substring(1)+ "qay");
+				break;
+			case 'r':
+				pigLatin.append(answer.substring(1)+ "ray");
+				break;
+			case 's':
+				if (answer.charAt(1) == 'h')
+					pigLatin.append(answer.substring(2)+ "shay");
+				else
+					pigLatin.append(answer.substring(1)+ "say");
+				break;
+			case 't':
+				if (answer.charAt(1) == 'h')
+					pigLatin.append(answer.substring(2)+ "thay");
+				else
+					pigLatin.append(answer.substring(1)+ "tay");
+				break;
+			case 'v':
+				pigLatin.append(answer.substring(1)+ "vay");
+				break;
+			case 'w':
+				pigLatin.append(answer.substring(1)+ "way");
+				break;
+			case 'x':
+				pigLatin.append(answer.substring(1)+ "xay");
+				break;
+			case 'y':
+				pigLatin.append(answer.substring(1)+ "yay");
+				break;
+			case 'z':
+				pigLatin.append(answer.substring(1)+ "zay");
+				break;
+			
+			}
+			System.out.println("i = " + i);
+			if (i < sizeOfArray-1) {
+				pigLatin.append(" ");
+				System.out.println("i is now " + i);
+			}
+			
+		}
+		System.out.println(pigLatin);
+		return pigLatin.toString();
 	}
 
 	/**
@@ -267,7 +619,30 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		//int counter = 0;
+		String num = Integer.toString(input);
+		int lengthOfString = num.length();
+		int[] arrayOfNums = new int[lengthOfString];
+		int temp = 0;
+		double temp2;
+		// Integer.parseInt(num, num.charAt(counter)
+		System.out.println("input = " + input + " string lenght= " + lengthOfString);
+		//counter = 0;
+		for (int i = 0; i <= lengthOfString-1; i++) {
+			arrayOfNums[i] = Character.getNumericValue(num.charAt(i));
+			System.out.println("curr char is " + num.charAt(i));
+			System.out.println("elevating " + arrayOfNums[i] + " to the " + lengthOfString + " power");
+			temp2 = Math.pow(arrayOfNums[i], lengthOfString);
+			System.out.println("temp2 = " + temp2);
+			temp += temp2;
+			
+		}
+		System.out.println("temp " + temp + "stringSize= " + lengthOfString);
+		if (temp == input) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
@@ -281,8 +656,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		System.out.println("L =" + l);
+		List<Long> answers = new ArrayList<>();
+		long counter = 2;
+		long halfOfL = l;
+		System.out.println("half of L =" + halfOfL);
+	//	boolean keepGoing = true;
+		do {		
+			if (halfOfL%counter == 0) {
+				answers.add(counter);		
+				System.out.println(halfOfL + " was successfully divided by " + counter);
+				halfOfL = halfOfL/counter;
+				System.out.println("halfOfL is now " + halfOfL);
+			}else {
+				System.out.println("tried to divide " + halfOfL + " with " + counter);
+				counter++;
+			}
+			System.out.println("Half of L = " + halfOfL + answers);
+			
+		}while (halfOfL != 1);
+		return answers;
 	}
 
 	/**
@@ -321,7 +714,40 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			StringBuilder rotation = new StringBuilder();
+			int lengthOfString = string.length();
+			String answer = null;
+			int temp;
+			for (int i = 0; i < lengthOfString; i++) {
+				temp = string.charAt(i);
+				System.out.print("got " + temp + " = " + (char) temp);
+				if ((temp >= 65) && (temp <= 90)) {
+					
+					temp = temp + key;
+					System.out.println(" which became a: " + (char) temp);
+					if (temp > 90) {
+						temp = temp - 26;
+						System.out.println("but is too big...");
+					}
+					System.out.println(" so it became a: " + (char) temp);
+					rotation.append((char) temp);
+				} else if (temp >= 97 && temp <= 122) {
+					
+					temp = temp + key;
+					System.out.print(" is now a: " + (char) temp);
+					if (temp > 122) {
+						temp = temp - 26;	
+						System.out.println("but since is too big...");
+					}
+					System.out.println(" and became a " + (char) temp + " " + temp);
+					rotation.append((char) temp);
+					System.out.println(rotation);
+				} else {
+					rotation.append((char) temp);
+				}
+			}
+
+			return rotation.toString();
 		}
 
 	}
@@ -416,6 +842,30 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
+		int[] nums = new int[10];
+		int temp;
+		double counter=10;
+		int total=0;
+		for (int i = 0; i < string.length(); i++) {
+			temp = string.charAt(i);
+			System.out.println("temp is: " + temp);
+			if (Character.isDigit(temp)) {
+				if (counter == 0) {		
+					if(string.charAt(i) == '1' && string.charAt(i+1) == '0') {
+					nums[i] = 10;
+					}else if (string.charAt(i) == 'X') {
+					nums[10] = 10;
+					}
+				} else {
+					temp = Math.pow(temp, counter)
+					nums[i]=Character.getNumericValue(temp);
+					System.out.println(nums[i] + " was added");
+					counter--;
+				}
+					//return false;
+				
+			}
+		}
 		return false;
 	}
 
@@ -506,6 +956,12 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
+		if (string.length() <= 1) {
+			return false;
+		}
+		String card[] = string.split(" ");
+		String card2 = card[1] + card[3];
+		
 		return false;
 	}
 
@@ -522,11 +978,16 @@ public class EvaluationService {
 	 * Now, perform the other three operations.
 	 * 
 	 * What is 7 minus 5?
+	 * int x = parseFirstNumber
+	 * int y = parsedSecondNumber
+	 * token = parsedToken
 	 * 
+	 * if (token = -)
+	 * int x - y
 	 * 2
 	 * 
 	 * What is 6 multiplied by 4?
-	 * 
+	 * 0	1	2	3		4	5
 	 * 24
 	 * 
 	 * What is 25 divided by 5?
@@ -538,7 +999,28 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		/*String str = string;
+		Scanner scan = new Scanner(string);
+		if (str.contains("divided")){
+			
+		}*/
+	//	Scanner scan = new Scanner(string);
+		//int next = scan.nextInt();
+		String str = string;
+		String arr[] = str.split(" ");
+		int x = Integer.parseInt(arr[2]);System.out.println("in it" + arr[2]);
+		int y = Integer.parseInt(arr[5]);
+		int z =0;
+		System.out.println("x = " + x);
+		System.out.println("y = " + y);
+		if (arr[3] == "multiplied") {
+			
+			z = x * y;
+		}
+		if (arr[3] == "divided") {
+			z = x / y;
+		}
+		return z;
 	}
 
 }
