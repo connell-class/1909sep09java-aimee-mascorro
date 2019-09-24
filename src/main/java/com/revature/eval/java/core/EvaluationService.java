@@ -4,9 +4,12 @@ import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -842,29 +845,34 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-		int[] nums = new int[10];
-		int temp;
-		double counter=10;
+	//	double[] nums = new double[10];
+		char temp;
+		int counter=10;
 		int total=0;
 		for (int i = 0; i < string.length(); i++) {
 			temp = string.charAt(i);
 			System.out.println("temp is: " + temp);
-			if (Character.isDigit(temp)) {
-				if (counter == 0) {		
-					if(string.charAt(i) == '1' && string.charAt(i+1) == '0') {
-					nums[i] = 10;
-					}else if (string.charAt(i) == 'X') {
-					nums[10] = 10;
-					}
+			if (Character.isDigit(temp) || temp == 'X') {
+				System.out.println("counter is at " + counter);
+				if (counter == 1 && string.charAt(i) == 'X') {
+					total = total + 10;
+					System.out.println("found an X and it became a 10 "  + total);
 				} else {
-					temp = Math.pow(temp, counter)
-					nums[i]=Character.getNumericValue(temp);
-					System.out.println(nums[i] + " was added");
+					System.out.println("i = " + i);
+					System.out.print("total is now=" + temp + "x" + counter);
+					total = (Character.getNumericValue(temp) * counter) + total;
+					//]=Character.getNumericValue(temp);
+					System.out.println("=" + total);
 					counter--;
 				}
 					//return false;
-				
 			}
+			
+		}System.out.println("got out with a " + total);
+		total = total % 11;
+		System.out.println(" mod 11 = " + total);
+		if (total == 0) {
+			return true;
 		}
 		return false;
 	}
@@ -884,6 +892,58 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
+
+		LinkedList<Character> charList = new LinkedList<Character>();
+		charList.add('a');
+		charList.add('b');
+		charList.add('c');
+		charList.add('d');
+		charList.add('e');
+		charList.add('f');
+		charList.add('g');
+		charList.add('h');
+		charList.add('i');
+		charList.add('j');
+		charList.add('k');
+		charList.add('l');
+		charList.add('m');
+		charList.add('n');
+		charList.add('o');
+		charList.add('p');
+		charList.add('q');
+		charList.add('r');
+		charList.add('s');
+		charList.add('t');
+		charList.add('u');
+		charList.add('v');
+		charList.add('w');
+		charList.add('x');
+		charList.add('y');
+		charList.add('z');
+		if (string.isEmpty()) {
+			return false;
+		}
+		String testString = string.toLowerCase();
+		System.out.println(testString);
+		char testChar;
+		for (int i = 0; i < testString.length(); i++) {
+			if (testString.charAt(i) != ' ') {
+				testChar = testString.charAt(i);
+				System.out.println("comparing " + testChar + " to " + testString.charAt(i));
+				if (charList.contains(testChar)) {
+					System.out.println(charList.remove(charList.indexOf(testChar)));
+					System.out.println("list is " + charList.size() + " long");
+				} else {
+					System.out.println("that char was already found");
+				}
+			}
+		}
+		System.out.println("counter is " + charList.size());
+		if (charList.size() == 0) {
+			return true;
+		}
+	     
+	     
 		return false;
 	}
 
@@ -915,7 +975,33 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int sum = 0;
+		int multiples = 0;
+		Set<Integer> multipleSet = new HashSet<Integer>(); 
+		System.out.println("looking for multiples below " + i);
+		for (int j = 0; j < set.length; j++) {
+			while (multiples < i) {
+				//multiples = set[j];
+				System.out.print(multiples + " + " + set[j]);
+				multiples = multiples + set[j];
+				System.out.println(" = " + multiples);
+				if(multiples < i) {
+			        multipleSet.add(multiples); 
+			        System.out.println(multiples + " was added");
+				}
+			}
+			multiples = 0;			
+		}
+		/*
+		 * Iterator<String> iterator=list.iterator(); while(iterator.hasNext()){
+		 * System.out.print(iterator.next()+" "); }
+		 */
+
+		for (int x : multipleSet) {
+			sum = sum + x;
+			System.out.println("sum = " + sum);
+		}
+		return sum;
 	}
 
 	/**
@@ -956,13 +1042,55 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
+		int sum = 0;
+		int temp = 0;
 		if (string.length() <= 1) {
 			return false;
 		}
-		String card[] = string.split(" ");
-		String card2 = card[1] + card[3];
-		
-		return false;
+//		String card[] = string.split(" ");
+//		String card2 = card[1] + card[3];
+		StringBuilder validating = new StringBuilder();
+		for (int i = 0; i < string.length(); i++) {
+			System.out.print("digits at ");
+			System.out.println(i + " is " + string.charAt(i) + ".");
+			if (Character.isDigit(string.charAt(i))) {
+				validating.append(string.charAt(i));
+			}else if (string.charAt(i) != ' '){
+				return false;
+			}
+		}
+		System.out.println(validating + " with size " + validating.length());
+		for (int i = 0; i < validating.length(); i++) {
+			System.out.print("i = ");
+			System.out.println(i);
+			temp = i;
+			temp = (temp + 1)%2;
+			System.out.println("remainder= " + temp);
+			if (temp == 0) {
+				System.out.print("doubling ");
+				System.out.print(Character.getNumericValue(validating.charAt(i)) + " = ");
+				temp =Character.getNumericValue(validating.charAt(i));
+				temp = temp * 2;
+				System.out.println(temp);
+				if (temp >= 9) {
+					System.out.print(temp + " - 9 = ");
+					temp -= 9;
+					System.out.println(temp);
+				}
+				sum = sum + temp;
+			}else {
+				temp = Character.getNumericValue(validating.charAt(i));
+				System.out.println("temp = " + temp);
+				sum = sum + temp;
+			}
+			System.out.println("sum so far= " + sum);
+		}
+			System.out.println("sum%10=" + sum%10);
+		if ((sum%10) == 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
