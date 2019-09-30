@@ -22,7 +22,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -40,19 +40,25 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		char[] acro = new char[phrase.length()];
 		int counter = 0;
-		System.out.println("phrase=" + phrase);
+	//	System.out.println("phrase=" + phrase);
 		acro[counter] = phrase.charAt(0);
 		counter++;
 		for (int i = 0; i < acro.length; i++) {
 			if (phrase.charAt(i) == ' ' || phrase.charAt(i) == '-') {
 				acro[counter] = phrase.charAt(i + 1);
 				counter++;
-				System.out.println("char was " + phrase.charAt(i + 1));
+		//		System.out.println("char was " + phrase.charAt(i + 1));
 			}
 		}
 		String str = new String(acro).toUpperCase();
-		System.out.println(str);
-		return str;
+		//System.out.println(str);
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(0) == ' ') {
+				counter = i;
+			}
+
+		}
+		return str.substring(0, counter);
 	}
 
 	/**
@@ -109,10 +115,10 @@ public class EvaluationService {
 			double a = this.sideOne;
 			double b = this.sideTwo;
 			double c = this.sideThree;
-			
+
 			if (a == b && b == c && c == a) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}
@@ -122,10 +128,10 @@ public class EvaluationService {
 			double a = this.sideOne;
 			double b = this.sideTwo;
 			double c = this.sideThree;
-			
+
 			if (a == b || b == c || c == a) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 		}
@@ -135,10 +141,10 @@ public class EvaluationService {
 			double a = this.sideOne;
 			double b = this.sideTwo;
 			double c = this.sideThree;
-			
+
 			if (a == b || b == c || c == a) {
 				return false;
-			}else {
+			} else {
 				return true;
 			}
 		}
@@ -164,11 +170,11 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		int score = 0;
 		char letter = 'A';
-		//= new char[string.length()];
-		
+		// = new char[string.length()];
+
 		for (int i = 0; i < string.length(); i++) {
 			letter = string.toUpperCase().charAt(i);
-			System.out.println("letter was " + letter);
+//			System.out.println("letter was " + letter);
 			switch (letter) {
 			case 'A':
 			case 'E':
@@ -184,37 +190,37 @@ public class EvaluationService {
 				break;
 			case 'D':
 			case 'G':
-				score+=2;
+				score += 2;
 				break;
 			case 'B':
 			case 'C':
 			case 'M':
 			case 'P':
-				score+= 3;
+				score += 3;
 				break;
 			case 'F':
 			case 'H':
 			case 'V':
 			case 'W':
 			case 'Y':
-				score+= 4;
+				score += 4;
 				break;
 			case 'K':
-				score+= 5;
+				score += 5;
 				break;
 			case 'J':
 			case 'X':
-				score+= 8;
+				score += 8;
 				break;
 			case 'Q':
 			case 'Z':
-				score+= 10;
+				score += 10;
 				break;
-			
-			}System.out.println("score so far " + score);
+
+			}
+//			System.out.println("score so far " + score);
 		}
-		
-		
+
 		return score;
 	}
 
@@ -250,75 +256,66 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		/* 
-		 * Solved this problem with this info: 
-		 * https://stackoverflow.com/questions/4047808/what-is-the-best-way-to-tell-if-a-character-is-a-letter-or-number-in-java-withou
-		*/
-		
+		/*
+		 * Solved this problem with this info:
+		 * https://stackoverflow.com/questions/4047808/what-is-the-best-way-to-tell-if-a
+		 * -character-is-a-letter-or-number-in-java-withou
+		 */
+
 		// TODO Write an implementation for this method declaration
 		/*
-		 * String card[] = string.split(" ");
-		String card2 = card[1] + card[3];
+		 * String card[] = string.split(" "); String card2 = card[1] + card[3];
 		 */
-		
-/*		int[] ary = new int[4];
-		
-		int i = 0;
-		Scanner sc = new Scanner(string);
-		System.out.println(sc);
-		while(sc.hasNextInt()) {
-			if (ary[0] == 1) {
-				i++;
-			}else {
-				ary[i++] = sc.nextInt();
-				
-			}
-		}
-		String answer = ary.toString();
-		System.out.println("string is " + answer);*/
-		
+
 		/*
-		String answer = string.replaceAll("[^0-9]", "");
-		System.out.println("the number is " + answer);
-		return answer;
-		
-		// youtu.be/NQOK2cam3js
-		 *   01234567890123
-		 	"(223) 456-7890"
-		 	  012  345 6789
-		 	 
+		 * int[] ary = new int[4];
+		 * 
+		 * int i = 0; Scanner sc = new Scanner(string); System.out.println(sc);
+		 * while(sc.hasNextInt()) { if (ary[0] == 1) { i++; }else { ary[i++] =
+		 * sc.nextInt();
+		 * 
+		 * } } String answer = ary.toString(); System.out.println("string is " +
+		 * answer);
+		 */
+
+		/*
+		 * String answer = string.replaceAll("[^0-9]", "");
+		 * System.out.println("the number is " + answer); return answer;
+		 * 
+		 * // youtu.be/NQOK2cam3js 01234567890123 "(223) 456-7890" 012 345 6789
+		 * 
 		 */
 		int skip = 0;
 		int j = 0;
 		char[] digits = new char[10];
-		System.out.println("length " + string.length());
+//		System.out.println("length " + string.length());
 		if (string.charAt(0) == '1') {
 			skip++;
 		}
 		for (int i = skip; i < string.length(); i++) {
-			System.out.print("digits is at ");
+//			System.out.print("digits is at ");
 			if (Character.isDigit(string.charAt(i))) {
-				System.out.print(j + " i is " + string.charAt(i));
+//				System.out.print(j + " i is " + string.charAt(i));
 				if (j > 9) {
-					System.out.println("ran out of space");
+//					System.out.println("ran out of space");
 					throw new IllegalArgumentException();
-					
+
 				} else {
 					digits[j] = string.charAt(i);
-					System.out.println(" curr digit " + digits[j]);
+//					System.out.println(" curr digit " + digits[j]);
 					j++;
 				}
-			}else {
-				System.out.println("char was " + string.charAt(i));
+			} else {
+//				System.out.println("char was " + string.charAt(i));
 			}
 		}
 
 		String answer = new String(digits);
-		if(j < 10) {
-			System.out.println("number too short ");
+		if (j < 10) {
+//			System.out.println("number too short ");
 			throw new IllegalArgumentException();
 		}
-		System.out.println(answer);
+//		System.out.println(answer);
 		return answer;
 	}
 
@@ -333,38 +330,38 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		
-		 HashMap<String, Integer> incidence = new HashMap<String, Integer>();
-		 String[] words;
-		 String splitChar= " ";
-		 if (string.contains(",")) {
-			 splitChar = ",";
-		 }else if (string.contains("[/]")) {
-			 splitChar = "[/]" ;
-		 }else if (string.contains("[.]")) {
-			 splitChar = "[.]";
-		 }else if (string.contains("[\n]")) {
-			 splitChar = "[\n]"; 
-		 }
-		 words = string.split(splitChar);
-		 System.out.println(Arrays.toString(words));
-		// int i = words.length;
-		 System.out.println("the test word is " + words[0]);
 
-		 for (int i = 0; i < words.length-1; i++) {
-			 System.out.println("the Sarray is this long " + i);
-			 System.out.println("the current word is " + words[i]);
-			 if(incidence.containsKey(words[i])) {
-				 int counter = incidence.get(words[i]);
-				 incidence.put(words[i], (counter+1));
-				 System.out.println("the word " + words[i] + " was found " + counter);
-			 }else {
-				 incidence.put(words[i], 1);
-				 System.out.println("the word added was " + words[i] + " counter is at " + incidence.get(words[i]));
-			 }
-			 
-		 }
-		 System.out.println(incidence);
+		HashMap<String, Integer> incidence = new HashMap<String, Integer>();
+		String[] words;
+		String splitChar = " ";
+		if (string.contains(",")) {
+			splitChar = ",";
+		} else if (string.contains("[/]")) {
+			splitChar = "[/]";
+		} else if (string.contains("[.]")) {
+			splitChar = "[.]";
+		} else if (string.contains("[\n]")) {
+			splitChar = "[\n]";
+		}
+		words = string.split(splitChar);
+//		System.out.println(Arrays.toString(words));
+		// int i = words.length;
+//		System.out.println("the test word is " + words[0]);
+
+		for (int i = 0; i < words.length - 1; i++) {
+//			System.out.println("the Sarray is this long " + i);
+//			System.out.println("the current word is " + words[i]);
+			if (incidence.containsKey(words[i])) {
+				int counter = incidence.get(words[i]);
+				incidence.put(words[i], (counter + 1));
+//				System.out.println("the word " + words[i] + " was found " + counter);
+			} else {
+				incidence.put(words[i], 1);
+//				System.out.println("the word added was " + words[i] + " counter is at " + incidence.get(words[i]));
+			}
+
+		}
+//		System.out.println(incidence);
 		return incidence;
 	}
 
@@ -406,69 +403,71 @@ public class EvaluationService {
 	static class BinarySearch<T> {
 		private List<T> sortedList;
 		int index = 0;
-		
+
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			//T numToCompare;
+			// T numToCompare;
 			int sizeOfList = sortedList.size();
-			int middleIs = sizeOfList/2;
+			int middleIs = sizeOfList / 2;
 			int counter = 0;
-			int comparing =0;
-			int toCompare=0;
-			System.out.println("Size of list is " + sizeOfList + " therefore " + sizeOfList/2 );
-		//	int toCompare = Integer.parseInt((String) t);
-		//	String toCompare = (String) sortedList.get(middleIs);
+			int comparing = 0;
+			int toCompare = 0;
+//			System.out.println("Size of list is " + sizeOfList + " therefore " + sizeOfList / 2);
+			// int toCompare = Integer.parseInt((String) t);
+			// String toCompare = (String) sortedList.get(middleIs);
 			if (t instanceof String) {
-				System.out.println("It was a string");
+//				System.out.println("It was a string");
 				comparing = Integer.parseInt((String) (t));
 				toCompare = Integer.parseInt((String) sortedList.get(middleIs));
-				System.out.println("comparing is " + comparing + " toCompare is " + toCompare);
-				
+//				System.out.println("comparing is " + comparing + " toCompare is " + toCompare);
+
 				while (comparing != toCompare) {
-					System.out.println("in while string");
+//					System.out.println("in while string");
 					if (toCompare < comparing) {
-						System.out.println(toCompare + " < " + comparing);
+//						System.out.println(toCompare + " < " + comparing);
 						middleIs++;
-						if(middleIs > sizeOfList-1) {
-							System.out.println("not found");
+						if (middleIs > sizeOfList - 1) {
+//							System.out.println("not found");
 							return 0;
 						}
 						toCompare = Integer.parseInt((String) sortedList.get(middleIs));
-						System.out.println("moved one forward");
-					}else{
-							//Integer.parseInt(toCompare) < Integer.parseInt((String) t)
-						 System.out.println(toCompare + ">" + comparing);
-						 middleIs--;
-						 if(middleIs < 0) {
-							 System.out.println("Not found");
-							 return 0;
-						 }
-						 toCompare = Integer.parseInt((String) sortedList.get(middleIs));
-					} /*else if (toCompare > comparing) {
-						toCompare = Integer.parseInt((String) sortedList.get(middleIs--));
-						System.out.println("new num to compare is " + toCompare);*/
+//						System.out.println("moved one forward");
+					} else {
+						// Integer.parseInt(toCompare) < Integer.parseInt((String) t)
+//						System.out.println(toCompare + ">" + comparing);
+						middleIs--;
+						if (middleIs < 0) {
+//							System.out.println("Not found");
+							return 0;
+						}
+						toCompare = Integer.parseInt((String) sortedList.get(middleIs));
+					} /*
+						 * else if (toCompare > comparing) { toCompare = Integer.parseInt((String)
+						 * sortedList.get(middleIs--)); System.out.println("new num to compare is " +
+						 * toCompare);
+						 */
 				}
-			}else if (t instanceof Integer) {
+			} else if (t instanceof Integer) {
 				// Integer.parseInt((String) t);
-				System.out.println("it was an int");
+//				System.out.println("it was an int");
 				comparing = (int) t;
 				toCompare = (int) sortedList.get(middleIs);
-				System.out.println("comparing " + comparing + " to " + toCompare);
+//				System.out.println("comparing " + comparing + " to " + toCompare);
 				while (comparing != toCompare) {
-					System.out.println("in while number");
+//					System.out.println("in while number");
 					if (toCompare < comparing) {
-						System.out.println(toCompare + " < " + comparing);
+//						System.out.println(toCompare + " < " + comparing);
 						middleIs++;
 						toCompare = (int) sortedList.get(middleIs);
-					}else if (toCompare > comparing) {
-						System.out.println(toCompare + " > " + comparing);
+					} else if (toCompare > comparing) {
+//						System.out.println(toCompare + " > " + comparing);
 						middleIs--;
 						toCompare = (int) sortedList.get(middleIs);
 					}
-		
+
 				}
 			}
-			System.out.println("Found it at " + middleIs + " !!");
+//			System.out.println("Found it at " + middleIs + " !!");
 			return middleIs;
 		}
 
@@ -506,7 +505,7 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		
+
 		String[] arrayOfStrings = string.split(" ");
 		int sizeOfArray = arrayOfStrings.length;
 		StringBuilder pigLatin = new StringBuilder();
@@ -515,93 +514,93 @@ public class EvaluationService {
 		for (int i = 0; i < sizeOfArray; i++) {
 			answer = arrayOfStrings[i];
 			temp = arrayOfStrings[i].charAt(0);
-			switch (temp){
+			switch (temp) {
 			case 'a':
-			case 'e':	
+			case 'e':
 			case 'i':
 			case 'o':
 			case 'u':
-				pigLatin.append(arrayOfStrings[i]+ "ay");
+				pigLatin.append(arrayOfStrings[i] + "ay");
 				break;
-			case 'b':			
-				pigLatin.append(answer.substring(1)+ "bay");
+			case 'b':
+				pigLatin.append(answer.substring(1) + "bay");
 				break;
 			case 'c':
-				pigLatin.append(answer.substring(1)+ "cay");
+				pigLatin.append(answer.substring(1) + "cay");
 				break;
 			case 'd':
-				pigLatin.append(answer.substring(1)+ "day");
+				pigLatin.append(answer.substring(1) + "day");
 				break;
 			case 'f':
-				pigLatin.append(answer.substring(1)+ "fay");
+				pigLatin.append(answer.substring(1) + "fay");
 				break;
 			case 'g':
-				pigLatin.append(answer.substring(1)+ "gay");
+				pigLatin.append(answer.substring(1) + "gay");
 				break;
 			case 'j':
-				pigLatin.append(answer.substring(1)+ "jay");
+				pigLatin.append(answer.substring(1) + "jay");
 				break;
 			case 'k':
-				pigLatin.append(answer.substring(1)+ "kay");
+				pigLatin.append(answer.substring(1) + "kay");
 				break;
 			case 'l':
-				pigLatin.append(answer.substring(1)+ "lay");
+				pigLatin.append(answer.substring(1) + "lay");
 				break;
 			case 'm':
-				pigLatin.append(answer.substring(1)+ "may");
+				pigLatin.append(answer.substring(1) + "may");
 				break;
 			case 'n':
-				pigLatin.append(answer.substring(1)+ "nay");
+				pigLatin.append(answer.substring(1) + "nay");
 				break;
 			case 'p':
-				pigLatin.append(answer.substring(1)+ "pay");
+				pigLatin.append(answer.substring(1) + "pay");
 				break;
 			case 'q':
 				if (answer.charAt(1) == 'u')
-					pigLatin.append(answer.substring(2)+ "quay");
+					pigLatin.append(answer.substring(2) + "quay");
 				else
-					pigLatin.append(answer.substring(1)+ "qay");
+					pigLatin.append(answer.substring(1) + "qay");
 				break;
 			case 'r':
-				pigLatin.append(answer.substring(1)+ "ray");
+				pigLatin.append(answer.substring(1) + "ray");
 				break;
 			case 's':
 				if (answer.charAt(1) == 'h')
-					pigLatin.append(answer.substring(2)+ "shay");
+					pigLatin.append(answer.substring(2) + "shay");
 				else
-					pigLatin.append(answer.substring(1)+ "say");
+					pigLatin.append(answer.substring(1) + "say");
 				break;
 			case 't':
 				if (answer.charAt(1) == 'h')
-					pigLatin.append(answer.substring(2)+ "thay");
+					pigLatin.append(answer.substring(2) + "thay");
 				else
-					pigLatin.append(answer.substring(1)+ "tay");
+					pigLatin.append(answer.substring(1) + "tay");
 				break;
 			case 'v':
-				pigLatin.append(answer.substring(1)+ "vay");
+				pigLatin.append(answer.substring(1) + "vay");
 				break;
 			case 'w':
-				pigLatin.append(answer.substring(1)+ "way");
+				pigLatin.append(answer.substring(1) + "way");
 				break;
 			case 'x':
-				pigLatin.append(answer.substring(1)+ "xay");
+				pigLatin.append(answer.substring(1) + "xay");
 				break;
 			case 'y':
-				pigLatin.append(answer.substring(1)+ "yay");
+				pigLatin.append(answer.substring(1) + "yay");
 				break;
 			case 'z':
-				pigLatin.append(answer.substring(1)+ "zay");
+				pigLatin.append(answer.substring(1) + "zay");
 				break;
-			
+
 			}
-			System.out.println("i = " + i);
-			if (i < sizeOfArray-1) {
+//			System.out.println("i = " + i);
+			if (i < sizeOfArray - 1) {
 				pigLatin.append(" ");
-				System.out.println("i is now " + i);
+//				System.out.println("i is now " + i);
 			}
-			
+
 		}
-		System.out.println(pigLatin);
+//		System.out.println(pigLatin);
 		return pigLatin.toString();
 	}
 
@@ -622,28 +621,28 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		//int counter = 0;
+		// int counter = 0;
 		String num = Integer.toString(input);
 		int lengthOfString = num.length();
 		int[] arrayOfNums = new int[lengthOfString];
 		int temp = 0;
 		double temp2;
 		// Integer.parseInt(num, num.charAt(counter)
-		System.out.println("input = " + input + " string lenght= " + lengthOfString);
-		//counter = 0;
-		for (int i = 0; i <= lengthOfString-1; i++) {
+//		System.out.println("input = " + input + " string lenght= " + lengthOfString);
+		// counter = 0;
+		for (int i = 0; i <= lengthOfString - 1; i++) {
 			arrayOfNums[i] = Character.getNumericValue(num.charAt(i));
-			System.out.println("curr char is " + num.charAt(i));
-			System.out.println("elevating " + arrayOfNums[i] + " to the " + lengthOfString + " power");
+//			System.out.println("curr char is " + num.charAt(i));
+//			System.out.println("elevating " + arrayOfNums[i] + " to the " + lengthOfString + " power");
 			temp2 = Math.pow(arrayOfNums[i], lengthOfString);
-			System.out.println("temp2 = " + temp2);
+//			System.out.println("temp2 = " + temp2);
 			temp += temp2;
-			
+
 		}
-		System.out.println("temp " + temp + "stringSize= " + lengthOfString);
+//		System.out.println("temp " + temp + "stringSize= " + lengthOfString);
 		if (temp == input) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
@@ -659,25 +658,25 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		System.out.println("L =" + l);
+//		System.out.println("L =" + l);
 		List<Long> answers = new ArrayList<>();
 		long counter = 2;
 		long halfOfL = l;
-		System.out.println("half of L =" + halfOfL);
-	//	boolean keepGoing = true;
-		do {		
-			if (halfOfL%counter == 0) {
-				answers.add(counter);		
-				System.out.println(halfOfL + " was successfully divided by " + counter);
-				halfOfL = halfOfL/counter;
-				System.out.println("halfOfL is now " + halfOfL);
-			}else {
-				System.out.println("tried to divide " + halfOfL + " with " + counter);
+//		System.out.println("half of L =" + halfOfL);
+		// boolean keepGoing = true;
+		do {
+			if (halfOfL % counter == 0) {
+				answers.add(counter);
+//				System.out.println(halfOfL + " was successfully divided by " + counter);
+				halfOfL = halfOfL / counter;
+//				System.out.println("halfOfL is now " + halfOfL);
+			} else {
+//				System.out.println("tried to divide " + halfOfL + " with " + counter);
 				counter++;
 			}
-			System.out.println("Half of L = " + halfOfL + answers);
-			
-		}while (halfOfL != 1);
+//			System.out.println("Half of L = " + halfOfL + answers);
+
+		} while (halfOfL != 1);
 		return answers;
 	}
 
@@ -723,28 +722,28 @@ public class EvaluationService {
 			int temp;
 			for (int i = 0; i < lengthOfString; i++) {
 				temp = string.charAt(i);
-				System.out.print("got " + temp + " = " + (char) temp);
+//				System.out.print("got " + temp + " = " + (char) temp);
 				if ((temp >= 65) && (temp <= 90)) {
-					
+
 					temp = temp + key;
-					System.out.println(" which became a: " + (char) temp);
+//					System.out.println(" which became a: " + (char) temp);
 					if (temp > 90) {
 						temp = temp - 26;
-						System.out.println("but is too big...");
+//						System.out.println("but is too big...");
 					}
-					System.out.println(" so it became a: " + (char) temp);
+//					System.out.println(" so it became a: " + (char) temp);
 					rotation.append((char) temp);
 				} else if (temp >= 97 && temp <= 122) {
-					
+
 					temp = temp + key;
-					System.out.print(" is now a: " + (char) temp);
+//					System.out.print(" is now a: " + (char) temp);
 					if (temp > 122) {
-						temp = temp - 26;	
-						System.out.println("but since is too big...");
+						temp = temp - 26;
+//						System.out.println("but since is too big...");
 					}
-					System.out.println(" and became a " + (char) temp + " " + temp);
+//					System.out.println(" and became a " + (char) temp + " " + temp);
 					rotation.append((char) temp);
-					System.out.println(rotation);
+//					System.out.println(rotation);
 				} else {
 					rotation.append((char) temp);
 				}
@@ -768,8 +767,49 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		if( i > 1000 || i < 1) {
+			throw new IllegalArgumentException();
+		}
+		List<Integer> answers = new ArrayList<>(i);
+		answers.add(2);
+		answers.add(3);
+		int counter = 2;
+		int number = 4;
+		int test = 2;
+		int answer = 0;
+	//	System.out.println("finding the " + i + "th");
+		// long halfOfL = l;
+//		System.out.println("half of L =" + halfOfL);
+		// boolean keepGoing = true;
+		do {
+		//	System.out.println("curr num " + number + "vs " + test);
+			if (number % test == 0) {
+			//	System.out.println("testing " + number + "%" + test);
+				
+				if (answers.contains(test)) {
+				//	System.out.println("not a prime");
+				//	System.out.println("RESET");
+					test=1;
+					number++;
+				}else if (number == test) {
+					answers.add(test);
+					counter++;
+				//	System.out.println("founda  prime!   RSEET" + test);
+					test=1;
+					number++;
+				}
+				//	break;				
+				
+			}
+			test++;
+		} while (counter < i);
+		//System.out.println("out");
+//			System.out.println("Half of L = " + halfOfL + answers);
+		//System.out.println(i - 1);
+		answer = answers.get(i - 1);
+		//System.out.println(answer);
+		return answer;
 	}
 
 	/**
@@ -806,7 +846,109 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			StringBuilder cypherT = new StringBuilder();
+//			cypherT.append("test");
+			// char[] cypherT = new char[string.length()];
+
+			char c;
+			int n = 0;
+			string = string.toLowerCase();
+			for (int i = 0; i < string.length(); i++) {
+				c = string.charAt(i);
+				n++;
+				if ((n % 5) == 0) {
+					decode(string);
+					// cypherT.append(' ');
+				}
+//				System.out.println("got " + c + " = " + (char) c);
+				switch (c) {
+				case 'a':
+					// cypherT.append("z");
+					cypherT.append('z');
+					break;
+				case 'b':
+					cypherT.append('t');
+					break;
+				case 'c':
+					cypherT.append('x');
+					break;
+				case 'd':
+					cypherT.append('w');
+					break;
+				case 'e':
+					cypherT.append('v');
+					break;
+				case 'f':
+					cypherT.append('u');
+					break;
+				case 'g':
+					cypherT.append('t');
+					break;
+				case 'h':
+					cypherT.append('s');
+					break;
+				case 'i':
+					cypherT.append('r');
+					break;
+				case 'j':
+					cypherT.append('q');
+					break;
+				case 'k':
+					cypherT.append('p');
+					break;
+				case 'l':
+					cypherT.append('o');
+					break;
+				case 'm':
+					cypherT.append('n');
+					break;
+				case 'n':
+					cypherT.append('m');
+					break;
+				case 'o':
+					cypherT.append('l');
+					break;
+				case 'p':
+					cypherT.append('k');
+					break;
+				case 'q':
+					cypherT.append('j');
+					break;
+				case 'r':
+					cypherT.append('i');
+					break;
+				case 's':
+					cypherT.append('h');
+					break;
+				case 't':
+					cypherT.append('g');
+					break;
+				case 'u':
+					cypherT.append('f');
+					break;
+				case 'v':
+					cypherT.append('e');
+					break;
+				case 'w':
+					cypherT.append('d');
+					break;
+				case 'x':
+					cypherT.append('c');
+					break;
+				case 'y':
+					cypherT.append('b');
+					break;
+				case 'z':
+					cypherT.append('a');
+					break;
+				default:
+					break;
+				}
+
+			}
+			String test = new String(cypherT);
+//			System.out.println("String so far: " + test);
+			return test;
 		}
 
 		/**
@@ -816,8 +958,122 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+
+			StringBuilder cypherT = new StringBuilder();
+//			cypherT.append("test");
+			// char[] cypherT = new char[string.length()];
+
+			char c;
+			int n = 0;
+			string = string.toLowerCase();
+			for (int i = 0; i < string.length(); i++) {
+				c = string.charAt(i);
+				n++;
+				// if (((n%5) == 0) && c == ' ') {
+				// decode(string);
+				// cypherT.append(' ');
+				// }
+//				System.out.println("got " + c + " = " + (char) c);
+				switch (c) {
+				case 'a':
+					// cypherT.append("z");
+					cypherT.append('z');
+					break;
+				case 'b':
+					cypherT.append('t');
+					break;
+				case 'c':
+					cypherT.append('x');
+					break;
+				case 'd':
+					cypherT.append('w');
+					break;
+				case 'e':
+					cypherT.append('v');
+					break;
+				case 'f':
+					cypherT.append('u');
+					break;
+				case 'g':
+					cypherT.append('t');
+					break;
+				case 'h':
+					cypherT.append('s');
+					break;
+				case 'i':
+					cypherT.append('r');
+					break;
+				case 'j':
+					cypherT.append('q');
+					break;
+				case 'k':
+					cypherT.append('p');
+					break;
+				case 'l':
+					cypherT.append('o');
+					break;
+				case 'm':
+					cypherT.append('n');
+					break;
+				case 'n':
+					cypherT.append('m');
+					break;
+				case 'o':
+					cypherT.append('l');
+					break;
+				case 'p':
+					cypherT.append('k');
+					break;
+				case 'q':
+					cypherT.append('j');
+					break;
+				case 'r':
+					cypherT.append('i');
+					break;
+				case 's':
+					cypherT.append('h');
+					break;
+				case 't':
+					cypherT.append('g');
+					break;
+				case 'u':
+					cypherT.append('f');
+					break;
+				case 'v':
+					cypherT.append('e');
+					break;
+				case 'w':
+					cypherT.append('d');
+					break;
+				case 'x':
+					cypherT.append('c');
+					break;
+				case 'y':
+					cypherT.append('b');
+					break;
+				case 'z':
+					cypherT.append('a');
+					break;
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+				case '0':
+					cypherT.append(string.charAt(i));
+				default:
+					break;
+				}
+
+			}
+			String test = new String(cypherT);
+//			System.out.println("String so far: " + test);
+			return test;
+
 		}
 	}
 
@@ -845,32 +1101,33 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-	//	double[] nums = new double[10];
+		// double[] nums = new double[10];
 		char temp;
-		int counter=10;
-		int total=0;
+		int counter = 10;
+		int total = 0;
 		for (int i = 0; i < string.length(); i++) {
 			temp = string.charAt(i);
-			System.out.println("temp is: " + temp);
+//			System.out.println("temp is: " + temp);
 			if (Character.isDigit(temp) || temp == 'X') {
-				System.out.println("counter is at " + counter);
+//				System.out.println("counter is at " + counter);
 				if (counter == 1 && string.charAt(i) == 'X') {
 					total = total + 10;
-					System.out.println("found an X and it became a 10 "  + total);
+//					System.out.println("found an X and it became a 10 " + total);
 				} else {
-					System.out.println("i = " + i);
-					System.out.print("total is now=" + temp + "x" + counter);
+//					System.out.println("i = " + i);
+//					System.out.print("total is now=" + temp + "x" + counter);
 					total = (Character.getNumericValue(temp) * counter) + total;
-					//]=Character.getNumericValue(temp);
-					System.out.println("=" + total);
+					// ]=Character.getNumericValue(temp);
+//					System.out.println("=" + total);
 					counter--;
 				}
-					//return false;
+				// return false;
 			}
-			
-		}System.out.println("got out with a " + total);
+
+		}
+//		System.out.println("got out with a " + total);
 		total = total % 11;
-		System.out.println(" mod 11 = " + total);
+//		System.out.println(" mod 11 = " + total);
 		if (total == 0) {
 			return true;
 		}
@@ -924,26 +1181,25 @@ public class EvaluationService {
 			return false;
 		}
 		String testString = string.toLowerCase();
-		System.out.println(testString);
+//		System.out.println(testString);
 		char testChar;
 		for (int i = 0; i < testString.length(); i++) {
 			if (testString.charAt(i) != ' ') {
 				testChar = testString.charAt(i);
-				System.out.println("comparing " + testChar + " to " + testString.charAt(i));
+//				System.out.println("comparing " + testChar + " to " + testString.charAt(i));
 				if (charList.contains(testChar)) {
-					System.out.println(charList.remove(charList.indexOf(testChar)));
-					System.out.println("list is " + charList.size() + " long");
+//					System.out.println(charList.remove(charList.indexOf(testChar)));
+//					System.out.println("list is " + charList.size() + " long");
 				} else {
-					System.out.println("that char was already found");
+//					System.out.println("that char was already found");
 				}
 			}
 		}
-		System.out.println("counter is " + charList.size());
+//		System.out.println("counter is " + charList.size());
 		if (charList.size() == 0) {
 			return true;
 		}
-	     
-	     
+
 		return false;
 	}
 
@@ -977,29 +1233,29 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		int sum = 0;
 		int multiples = 0;
-		Set<Integer> multipleSet = new HashSet<Integer>(); 
-		System.out.println("looking for multiples below " + i);
+		Set<Integer> multipleSet = new HashSet<Integer>();
+//		System.out.println("looking for multiples below " + i);
 		for (int j = 0; j < set.length; j++) {
 			while (multiples < i) {
-				//multiples = set[j];
-				System.out.print(multiples + " + " + set[j]);
+				// multiples = set[j];
+//				System.out.print(multiples + " + " + set[j]);
 				multiples = multiples + set[j];
-				System.out.println(" = " + multiples);
-				if(multiples < i) {
-			        multipleSet.add(multiples); 
-			        System.out.println(multiples + " was added");
+//				System.out.println(" = " + multiples);
+				if (multiples < i) {
+					multipleSet.add(multiples);
+//					System.out.println(multiples + " was added");
 				}
 			}
-			multiples = 0;			
+			multiples = 0;
 		}
 		/*
-		 * Iterator<String> iterator=list.iterator(); while(iterator.hasNext()){
+		 * Iterator<String> iterator=list.iterator(); while(iterator.hasNext()){ // *
 		 * System.out.print(iterator.next()+" "); }
 		 */
 
 		for (int x : multipleSet) {
 			sum = sum + x;
-			System.out.println("sum = " + sum);
+//			System.out.println("sum = " + sum);
 		}
 		return sum;
 	}
@@ -1051,44 +1307,44 @@ public class EvaluationService {
 //		String card2 = card[1] + card[3];
 		StringBuilder validating = new StringBuilder();
 		for (int i = 0; i < string.length(); i++) {
-			System.out.print("digits at ");
-			System.out.println(i + " is " + string.charAt(i) + ".");
+//			System.out.print("digits at ");
+//			System.out.println(i + " is " + string.charAt(i) + ".");
 			if (Character.isDigit(string.charAt(i))) {
 				validating.append(string.charAt(i));
-			}else if (string.charAt(i) != ' '){
+			} else if (string.charAt(i) != ' ') {
 				return false;
 			}
 		}
-		System.out.println(validating + " with size " + validating.length());
+//		System.out.println(validating + " with size " + validating.length());
 		for (int i = 0; i < validating.length(); i++) {
-			System.out.print("i = ");
-			System.out.println(i);
+//			System.out.print("i = ");
+//			System.out.println(i);
 			temp = i;
-			temp = (temp + 1)%2;
-			System.out.println("remainder= " + temp);
+			temp = (temp + 1) % 2;
+//			System.out.println("remainder= " + temp);
 			if (temp == 0) {
-				System.out.print("doubling ");
-				System.out.print(Character.getNumericValue(validating.charAt(i)) + " = ");
-				temp =Character.getNumericValue(validating.charAt(i));
+//				System.out.print("doubling ");
+//				System.out.print(Character.getNumericValue(validating.charAt(i)) + " = ");
+				temp = Character.getNumericValue(validating.charAt(i));
 				temp = temp * 2;
-				System.out.println(temp);
+//				System.out.println(temp);
 				if (temp >= 9) {
-					System.out.print(temp + " - 9 = ");
+//					System.out.print(temp + " - 9 = ");
 					temp -= 9;
-					System.out.println(temp);
+//					System.out.println(temp);
 				}
 				sum = sum + temp;
-			}else {
+			} else {
 				temp = Character.getNumericValue(validating.charAt(i));
-				System.out.println("temp = " + temp);
+//				System.out.println("temp = " + temp);
 				sum = sum + temp;
 			}
-			System.out.println("sum so far= " + sum);
+//			System.out.println("sum so far= " + sum);
 		}
-			System.out.println("sum%10=" + sum%10);
-		if ((sum%10) == 0) {
+//		System.out.println("sum%10=" + sum % 10);
+		if ((sum % 10) == 0) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
@@ -1105,18 +1361,12 @@ public class EvaluationService {
 	 * 
 	 * Now, perform the other three operations.
 	 * 
-	 * What is 7 minus 5?
-	 * int x = parseFirstNumber
-	 * int y = parsedSecondNumber
-	 * token = parsedToken
+	 * What is 7 minus 5? int x = parseFirstNumber int y = parsedSecondNumber token
+	 * = parsedToken
 	 * 
-	 * if (token = -)
-	 * int x - y
-	 * 2
+	 * if (token = -) int x - y 2
 	 * 
-	 * What is 6 multiplied by 4?
-	 * 0	1	2	3		4	5
-	 * 24
+	 * What is 6 multiplied by 4? 0 1 2 3 4 5 24
 	 * 
 	 * What is 25 divided by 5?
 	 * 
@@ -1127,27 +1377,81 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		/*String str = string;
-		Scanner scan = new Scanner(string);
-		if (str.contains("divided")){
-			
-		}*/
-	//	Scanner scan = new Scanner(string);
-		//int next = scan.nextInt();
-		String str = string;
-		String arr[] = str.split(" ");
-		int x = Integer.parseInt(arr[2]);System.out.println("in it" + arr[2]);
-		int y = Integer.parseInt(arr[5]);
-		int z =0;
-		System.out.println("x = " + x);
-		System.out.println("y = " + y);
-		if (arr[3] == "multiplied") {
-			
+		/*
+		 * String str = string; Scanner scan = new Scanner(string); if
+		 * (str.contains("divided")){
+		 * 
+		 * }
+		 */
+		// Scanner scan = new Scanner(string);
+		// int next = scan.nextInt();
+		StringBuilder number = new StringBuilder();
+		String arr[] = string.split(" ");
+		int x = 0;
+		int y = 0;
+		int counter = 0;
+		char caseLetter = ' ';
+		for (int i = 0; i < arr.length; i++) {
+//			System.out.println(arr[i]);
+			if ((arr[i].charAt(0) == '-' || Character.isDigit(arr[i].charAt(0))) && counter == 0) {
+				// x = Integer.getInteger(arr[i]);
+				x = Integer.parseInt(arr[i]);
+//				System.out.println(x);
+				counter++;
+//				System.out.println("counter is " + counter);
+			} else if (arr[i].contains("plus")) {
+//				System.out.println(arr[i]);
+				caseLetter = '+';
+			} else if (arr[i].contains("minus")) {
+//				System.out.println(arr[i]);
+				caseLetter = '-';
+			} else if (arr[i].contains("multiplied")) {
+//				System.out.println(arr[i]);
+				caseLetter = 'x';
+			} else if (arr[i].contains("divided")) {
+//				System.out.println(arr[i]);
+				caseLetter = '/';
+			} else if ((arr[i].charAt(0) == '-' || Character.isDigit(arr[i].charAt(0))) && counter == 1) {
+//				System.out.println("is a -, i= " + i);
+				// y = Integer.parseInt(arr[i]);
+				String temp = arr[i];
+//				System.out.println(temp);
+				for (int j = 0; j < temp.length(); j++) {
+					if (temp.charAt(j) == '-') {
+						number.append(temp.charAt(j));
+//						System.out.println("added a -");
+					} else if (Character.isDigit(temp.charAt(j))) {
+						number.append(temp.charAt(j));
+//						System.out.println(number);
+					}
+				}
+				// number.append(arr[i].charAt(0));
+				temp = number.toString();
+//				System.out.println(temp);
+				y = Integer.parseInt(temp);
+//				System.out.println(y);
+			}
+		}
+		// int x = Integer.parseInt(arr[2]);
+		// System.out.println("in it" + arr[2]);
+		// int y = Integer.parseInt(arr[5]);
+		int z = 0;
+//		System.out.println("x = " + x);
+//		System.out.println("y = " + y);
+		switch (caseLetter) {
+		case 'x':
 			z = x * y;
-		}
-		if (arr[3] == "divided") {
+			break;
+		case '/':
 			z = x / y;
+			break;
+		case '-':
+			z = x - y;
+			break;
+		case '+':
+			z = x + y;
 		}
+//		System.out.println(z);
 		return z;
 	}
 
